@@ -1,6 +1,6 @@
 package View_Controller;
 
-import Model.Inhouse;
+import Model.InHouse;
 import Model.Outsourced;
 import Model.Part;
 import static Model.Inventory.addPart;
@@ -17,7 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.xml.bind.ValidationException;
+/* import javax.xml.bind.ValidationException; */
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
