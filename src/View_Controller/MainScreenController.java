@@ -29,6 +29,36 @@ public class MainScreenController implements  Initializable {
     }
 
     @FXML
+    void onActionCreatePart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionModifyPart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionDeletePart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionCreateProduct(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionModifyProduct(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionDeleteProduct(ActionEvent event) {
+
+    }
+
+    @FXML
     private TableColumn<?, ?> partIdCol;
 
     @FXML

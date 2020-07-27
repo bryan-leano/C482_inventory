@@ -27,16 +27,16 @@
       </VBox>
       <HBox layoutX="628.0" layoutY="100.0" prefHeight="41.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" text="Modify" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#onActionCreatePart" text="Add" />
+            <Button mnemonicParsing="false" onAction="#OnActionModifyPart" text="Modify" />
+            <Button mnemonicParsing="false" onAction="#OnActionDeletePart" text="Delete" />
          </children>
       </HBox>
       <HBox layoutX="628.0" layoutY="287.0" prefHeight="41.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" text="Modify" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#OnActionAddProduct" text="Add" />
+            <Button mnemonicParsing="false" onAction="#onActionModifyProduct" text="Modify" />
+            <Button mnemonicParsing="false" onAction="#onActionDeleteProduct" text="Delete" />
          </children></HBox>
       <HBox alignment="BOTTOM_RIGHT" layoutX="650.0" layoutY="357.0" prefHeight="53.0" prefWidth="200.0">
          <children>
