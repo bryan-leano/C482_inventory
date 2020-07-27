@@ -34,6 +34,16 @@ public class AddPartController implements Initializable {
     }
 
     @FXML
+    void onActionSavePart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionDisplayMainScreen(ActionEvent event) {
+
+    }
+
+    @FXML
     private TextField partIdTxt;
 
     @FXML
