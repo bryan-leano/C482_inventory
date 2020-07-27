@@ -52,8 +52,8 @@
                 </GridPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#onActionSaveModifyPart" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#onActionDisplayMainScreen" text="Cancel" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />

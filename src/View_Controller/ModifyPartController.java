@@ -34,6 +34,16 @@ public class ModifyPartController implements Initializable {
     }
 
     @FXML
+    void onActionSaveModifyPart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionDisplayMainScreen(ActionEvent event) {
+
+    }
+
+    @FXML
     private TextField partIdTxt;
 
     @FXML
