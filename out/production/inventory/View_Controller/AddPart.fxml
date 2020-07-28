@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddPart">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddPartController">
    <children>
       <VBox prefHeight="340.0" prefWidth="360.0">
          <children>
@@ -31,26 +31,26 @@
                   <Label text="Max" GridPane.rowIndex="4" />
                   <Label text="Min" GridPane.rowIndex="5" />
                   <Label text="Machine ID" GridPane.rowIndex="6" />
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="partIdTxt" GridPane.columnIndex="1" />
+                  <TextField fx:id="nameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="invTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="priceCostTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="maxTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="minTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="machineIdTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="In house/Outsourced" GridPane.rowIndex="7" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="In House" />
-                        <RadioButton mnemonicParsing="false" text="Outsource" />
+                        <RadioButton fx:id="InHouseRBtn" mnemonicParsing="false" text="InHouse" />
+                        <RadioButton fx:id="OutsourcedRBtn" mnemonicParsing="false" text="Outsourced" />
                      </children>
                   </HBox>
                </children>
             </GridPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#onActionSavePart" text="Save" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionDisplayMainScreen" text="Cancel" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />

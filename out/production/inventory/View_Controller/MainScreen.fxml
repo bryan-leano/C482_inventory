@@ -3,40 +3,40 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.MainScreen">
+<AnchorPane prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.MainScreenController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <TableView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="480.0">
+            <TableView fx:id="partTableView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="480.0">
               <columns>
-                <TableColumn prefWidth="120.0" text="Part ID" />
-                <TableColumn prefWidth="120.0" text="Part Name" />
-                  <TableColumn prefWidth="120.0" text="Inventory Level" />
-                  <TableColumn prefWidth="120.0" text="Price/Cost per Unit" />
+                <TableColumn fx:id="partIdCol" prefWidth="120.0" text="Part ID" />
+                <TableColumn fx:id="partNameCol" prefWidth="120.0" text="Part Name" />
+                  <TableColumn fx:id="partInvLevelCol" prefWidth="120.0" text="Inventory Level" />
+                  <TableColumn fx:id="partPricePerUnitCol" prefWidth="120.0" text="Price/Cost per Unit" />
               </columns>
             </TableView>
-            <TableView layoutX="10.0" layoutY="110.0" maxWidth="-Infinity" prefHeight="200.0" prefWidth="480.0">
+            <TableView fx:id="productTableView" layoutX="10.0" layoutY="110.0" maxWidth="-Infinity" prefHeight="200.0" prefWidth="480.0">
                <columns>
-                  <TableColumn prefWidth="120.0" text="Product ID" />
-                  <TableColumn prefWidth="120.0" text="Product Name" />
-                  <TableColumn prefWidth="120.0" text="Inventory Level" />
-                  <TableColumn prefWidth="120.0" text="Price per Unit" />
+                  <TableColumn fx:id="productIdCol" prefWidth="120.0" text="Product ID" />
+                  <TableColumn fx:id="productNameCol" prefWidth="120.0" text="Product Name" />
+                  <TableColumn fx:id="productInvLevelCol" prefWidth="120.0" text="Inventory Level" />
+                  <TableColumn fx:id="productPricePerUnitCol" prefWidth="120.0" text="Price per Unit" />
                </columns>
             </TableView>
          </children>
       </VBox>
       <HBox layoutX="628.0" layoutY="100.0" prefHeight="41.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" text="Modify" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#onActionCreatePart" text="Add" />
+            <Button mnemonicParsing="false" onAction="#onActionModifyPart" text="Modify" />
+            <Button mnemonicParsing="false" onAction="#onActionDeletePart" text="Delete" />
          </children>
       </HBox>
       <HBox layoutX="628.0" layoutY="287.0" prefHeight="41.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" text="Modify" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#onActionCreateProduct" text="Add" />
+            <Button mnemonicParsing="false" onAction="#onActionModifyProduct" text="Modify" />
+            <Button mnemonicParsing="false" onAction="#onActionDeleteProduct" text="Delete" />
          </children></HBox>
       <HBox alignment="BOTTOM_RIGHT" layoutX="650.0" layoutY="357.0" prefHeight="53.0" prefWidth="200.0">
          <children>

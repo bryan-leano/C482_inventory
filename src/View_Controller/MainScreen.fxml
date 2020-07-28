@@ -28,13 +28,13 @@
       <HBox layoutX="628.0" layoutY="100.0" prefHeight="41.0" prefWidth="200.0">
          <children>
             <Button mnemonicParsing="false" onAction="#onActionCreatePart" text="Add" />
-            <Button mnemonicParsing="false" onAction="#OnActionModifyPart" text="Modify" />
-            <Button mnemonicParsing="false" onAction="#OnActionDeletePart" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#onActionModifyPart" text="Modify" />
+            <Button mnemonicParsing="false" onAction="#onActionDeletePart" text="Delete" />
          </children>
       </HBox>
       <HBox layoutX="628.0" layoutY="287.0" prefHeight="41.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#OnActionAddProduct" text="Add" />
+            <Button mnemonicParsing="false" onAction="#onActionCreateProduct" text="Add" />
             <Button mnemonicParsing="false" onAction="#onActionModifyProduct" text="Modify" />
             <Button mnemonicParsing="false" onAction="#onActionDeleteProduct" text="Delete" />
          </children></HBox>

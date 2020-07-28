@@ -16,19 +16,19 @@ public class Inventory {
     }
 
     public static Part lookupPart (int partId) {
-
+        return null;
     }
 
     public static  Product lookupProduct (int productId) {
-
+        return null;
     }
 
     public ObservableList<Part> lookupPart(String partName) {
-
+        return null;
     }
 
     public ObservableList<Product> lookupProduct(String productName) {
-
+        return null;
     }
 
     public static void updatePart(int index, Part selectedPart) {
@@ -40,11 +40,11 @@ public class Inventory {
     }
 
     public static boolean deletePart(Part selectedPart) {
-
+        return false;
     }
 
     public static boolean deleteProduct(Product selectedProduct) {
-
+        return false;
     }
 
     public static ObservableList<Part> getAllParts() {

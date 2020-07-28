@@ -30,7 +30,7 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionCreatePart(ActionEvent event) {
-
+        System.out.println("This works!");
     }
 
     @FXML
