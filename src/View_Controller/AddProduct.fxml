@@ -28,12 +28,12 @@
                   <Label text="Price" GridPane.rowIndex="3" />
                   <Label text="Min" GridPane.rowIndex="4" />
                   <Label text="Max" GridPane.rowIndex="5" />
-                  <TextField fx:id="productIdTxt" onAction="#productIdTxt" GridPane.columnIndex="1" />
-                  <TextField fx:id="productNameTxt" onAction="#productNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="invTxt" onAction="#productInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="priceTxt" onAction="#productPriceCostTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="minTxt" onAction="#productMinTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="maxTxt" onAction="#productMaxTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="productIdTxt" GridPane.columnIndex="1" />
+                  <TextField fx:id="productNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="productInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="productPriceCostTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="productMinTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="productMaxTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
          </children>
