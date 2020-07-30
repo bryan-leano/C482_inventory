@@ -41,8 +41,11 @@
                   <Label text="In house/Outsourced" GridPane.rowIndex="7" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <RadioButton fx:id="InHouseRBtn" mnemonicParsing="false" text="InHouse" />
-                        <RadioButton fx:id="OutsourcedRBtn" mnemonicParsing="false" text="Outsourced" />
+                        <RadioButton fx:id="InHouseRBtn" mnemonicParsing="false" text="InHouse">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="inHouseOutsourceTG" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="OutsourcedRBtn" mnemonicParsing="false" text="Outsourced" toggleGroup="$inHouseOutsourceTG" />
                      </children>
                   </HBox>
                </children>

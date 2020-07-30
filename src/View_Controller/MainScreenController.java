@@ -22,6 +22,10 @@ import java.util.ResourceBundle;
 
 public class MainScreenController implements  Initializable {
 
+    Stage stage;
+    Parent scene;
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -29,8 +33,8 @@ public class MainScreenController implements  Initializable {
     }
 
     @FXML
-    void onActionCreatePart(ActionEvent event) {
-        System.out.println("This works!");
+    void onActionCreatePart(ActionEvent event) throws IOException {
+        
     }
 
     @FXML
