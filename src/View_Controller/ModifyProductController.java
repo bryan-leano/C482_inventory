@@ -22,6 +22,9 @@ import java.util.ResourceBundle;
 
 public class ModifyProductController implements Initializable {
 
+    Stage stage;
+    Parent scene;
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -49,8 +52,11 @@ public class ModifyProductController implements Initializable {
     }
 
     @FXML
-    void onActionDisplayMainScreen(ActionEvent event) {
-
+    void onActionDisplayMainScreen(ActionEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML

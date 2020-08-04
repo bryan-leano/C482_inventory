@@ -1,8 +1,7 @@
 package View_Controller;
 
-import Model.InHouse;
-import Model.Outsourced;
-import Model.Part;
+import Model.*;
+
 import static Model.Inventory.addPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /* import javax.xml.bind.ValidationException; */
@@ -25,21 +25,38 @@ public class MainScreenController implements  Initializable {
     Stage stage;
     Parent scene;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+
+        partTableView.setItems(Inventory.getAllParts());
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        productTableView.setItems(Inventory.getAllProducts());
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
 
     @FXML
     void onActionCreatePart(ActionEvent event) throws IOException {
-        
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("AddPart.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
-    void onActionModifyPart(ActionEvent event) {
-
+    void onActionModifyPart(ActionEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
@@ -48,13 +65,19 @@ public class MainScreenController implements  Initializable {
     }
 
     @FXML
-    void onActionCreateProduct(ActionEvent event) {
-
+    void onActionCreateProduct(ActionEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
-    void onActionModifyProduct(ActionEvent event) {
-
+    void onActionModifyProduct(ActionEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
@@ -63,33 +86,38 @@ public class MainScreenController implements  Initializable {
     }
 
     @FXML
-    private TableColumn<?, ?> partIdCol;
+    void onActionExit(ActionEvent event) {
+        System.exit(0);
+    }
 
     @FXML
-    private TableColumn<?, ?> partNameCol;
+    private TableColumn<Part, Integer> partIdCol;
 
     @FXML
-    private TableColumn<?, ?> partInvLevelCol;
+    private TableColumn<Part, String> partNameCol;
 
     @FXML
-    private TableColumn<?, ?> partPricePerUnitCol;
+    private TableColumn<Part, Integer> partInvLevelCol;
 
     @FXML
-    private TableView<?> partTableView;
+    private TableColumn<Part, Double> partPricePerUnitCol;
 
     @FXML
-    private TableColumn<?, ?> productIdCol;
+    private TableView<Part> partTableView;
 
     @FXML
-    private TableColumn<?, ?> productNameCol;
+    private TableColumn<Product, Integer> productIdCol;
 
     @FXML
-    private TableColumn<?, ?> productInvLevelCol;
+    private TableColumn<Product, String> productNameCol;
 
     @FXML
-    private TableColumn<?, ?> productPricePerUnitCol;
+    private TableColumn<Product, Integer> productInvLevelCol;
 
     @FXML
-    private TableView<?> productTableView;
+    private TableColumn<Product, Double> productPricePerUnitCol;
+
+    @FXML
+    private TableView<Product> productTableView;
 
 }
