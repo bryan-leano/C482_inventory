@@ -25,6 +25,16 @@ public class MainScreenController implements  Initializable {
     Stage stage;
     Parent scene;
 
+    public boolean search(int id)
+    {
+        for(Part part : Inventory.getAllParts() )
+        {
+            if(part.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -40,6 +50,11 @@ public class MainScreenController implements  Initializable {
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        if(search(4))
+            System.out.println("Found");
+        else
+            System.out.println("Not found");
 
     }
 
