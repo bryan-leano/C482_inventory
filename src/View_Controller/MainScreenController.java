@@ -35,6 +35,23 @@ public class MainScreenController implements  Initializable {
         return false;
     }
 
+    public boolean update(int id, Part partUpdate)
+    {
+        int index = -1;
+
+        for(Part part : Inventory.getAllParts())
+        {
+            index++;
+
+            if(part.getId() == id)
+            {
+                Inventory.getAllParts().set(index, partUpdate);
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -51,11 +68,17 @@ public class MainScreenController implements  Initializable {
         productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        /*
         if(search(4))
             System.out.println("Found");
         else
             System.out.println("Not found");
+        */
 
+        if(update(1, new Part(1, "Screw", 9.99, 12, 1, 5)))
+            System.out.println("update successful");
+        else
+            System.out.println("update failed");
     }
 
     @FXML
