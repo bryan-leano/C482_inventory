@@ -52,6 +52,17 @@ public class MainScreenController implements  Initializable {
         return false;
     }
 
+    public boolean delete(int id)
+    {
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+                return Inventory.getAllParts().remove(part);
+        }
+
+        return false;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -75,10 +86,17 @@ public class MainScreenController implements  Initializable {
             System.out.println("Not found");
         */
 
+        /*
         if(update(1, new Part(1, "Screw", 9.99, 12, 1, 5)))
             System.out.println("update successful");
         else
             System.out.println("update failed");
+         */
+
+        if(delete(3))
+            System.out.println("delete successful");
+        else
+            System.out.println("no match");
     }
 
     @FXML
