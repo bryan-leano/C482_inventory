@@ -3,6 +3,8 @@ package View_Controller;
 import Model.*;
 
 import static Model.Inventory.addPart;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.BlockingDeque;
 
 public class MainScreenController implements  Initializable {
 
@@ -63,6 +66,31 @@ public class MainScreenController implements  Initializable {
         return false;
     }
 
+    public Part selectPart(int id){
+        for(Part part : Inventory.getAllParts()){
+            if(part.getId() == id)
+                return part;
+        }
+            return null;
+    }
+
+    public ObservableList<Part> filter(String name)
+    {
+        if(!(Inventory.getAllFilteredParts().isEmpty()))
+            Inventory.getAllFilteredParts().clear();
+
+        for(Part part : Inventory.getAllParts()){
+            if(part.getName().contains(name)) {
+                Inventory.getAllFilteredParts().add(part);
+            }
+        }
+
+        if(Inventory.getAllFilteredParts().isEmpty())
+            return Inventory.getAllParts();
+        else
+            return Inventory.getAllFilteredParts();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -84,19 +112,23 @@ public class MainScreenController implements  Initializable {
             System.out.println("Found");
         else
             System.out.println("Not found");
-        */
 
-        /*
+
+
         if(update(1, new Part(1, "Screw", 9.99, 12, 1, 5)))
             System.out.println("update successful");
         else
             System.out.println("update failed");
-         */
+
 
         if(delete(3))
             System.out.println("delete successful");
         else
             System.out.println("no match");
+        */
+
+        //partTableView.getSelectionModel().select(selectPart(3));
+
     }
 
     @FXML
@@ -109,10 +141,19 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionModifyPart(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ModifyPart.fxml"));
+        loader.load();
+
+        ModifyPartController MPartCController = loader.getController();
+        MPartCController.sendPart(partTableView.getSelectionModel().getSelectedItem());
+
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
-        stage.show();
+        stage.showAndWait();
+
     }
 
     @FXML
