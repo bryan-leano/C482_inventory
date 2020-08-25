@@ -60,19 +60,31 @@ public class AddPartController implements Initializable {
         }
         catch(NumberFormatException e)
         {
-            System.out.println("Please enter valid values in fields.");
-            System.out.println("Exception: " + e);
-            System.out.println("Exception: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning dialog");
+            alert.setContentText("Please add valid value for each text field");
+            alert.showAndWait();
         }
 
     }
 
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will clear all text field " +
+                "values, do you want to continue?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+
+
     }
 
     @FXML
