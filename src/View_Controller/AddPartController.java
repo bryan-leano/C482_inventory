@@ -45,13 +45,16 @@ public class AddPartController implements Initializable {
             int min = Integer.parseInt(minTxt.getText());
             boolean isInHouse;
 
-            if(InHouseRBtn.isSelected())
+            if(InHouseRBtn.isSelected()) {
                 isInHouse = true;
-            else
+                int machineId = Integer.parseInt(machineIdTxt.getText());
+                Inventory.addPart(new InHouse(id, name, price, stock, min, max, machineId));
+            }
+            else {
                 isInHouse = false;
-
-            int machineId = 0;
-            Inventory.addPart(new InHouse(id, name, price, stock,  min, max, machineId));
+                String CompanyName = machineIdTxt.getText();
+                Inventory.addPart(new Outsourced(id, name, price, stock, min, max, CompanyName));
+            }
 
             stage = (Stage)((Button)event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
@@ -88,6 +91,16 @@ public class AddPartController implements Initializable {
     }
 
     @FXML
+    void OnActionInHouseSelection(ActionEvent event) throws IOException {
+        machineCompanyLbl.setText("Machine ID");
+    }
+
+    @FXML
+    void OnActionOutsourcedSelection(ActionEvent event) throws IOException {
+        machineCompanyLbl.setText("Company Name");
+    }
+
+    @FXML
     private TextField partIdTxt;
 
     @FXML
@@ -113,5 +126,8 @@ public class AddPartController implements Initializable {
 
     @FXML
     private RadioButton OutsourcedRBtn;
+
+    @FXML
+    private Label machineCompanyLbl;
 
 }

@@ -30,7 +30,7 @@
                   <Label text="Price/Cost" GridPane.rowIndex="3" />
                   <Label text="Max" GridPane.rowIndex="4" />
                   <Label text="Min" GridPane.rowIndex="5" />
-                  <Label text="Machine ID" GridPane.rowIndex="6" />
+                  <Label fx:id="machineCompanyLbl" text="Machine ID" GridPane.rowIndex="6" />
                   <TextField fx:id="partIdTxt" GridPane.columnIndex="1" />
                   <TextField fx:id="nameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="invTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -41,11 +41,11 @@
                   <Label text="In house/Outsourced" GridPane.rowIndex="7" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <RadioButton fx:id="InHouseRBtn" mnemonicParsing="false" text="InHouse">
+                        <RadioButton fx:id="InHouseRBtn" mnemonicParsing="false" onAction="#OnActionInHouseSelection" selected="true" text="InHouse">
                            <toggleGroup>
                               <ToggleGroup fx:id="inHouseOutsourceTG" />
                            </toggleGroup></RadioButton>
-                        <RadioButton fx:id="OutsourcedRBtn" mnemonicParsing="false" text="Outsourced" toggleGroup="$inHouseOutsourceTG" />
+                        <RadioButton fx:id="OutsourcedRBtn" mnemonicParsing="false" onAction="#OnActionOutsourcedSelection" text="Outsourced" toggleGroup="$inHouseOutsourceTG" />
                      </children>
                   </HBox>
                </children>
