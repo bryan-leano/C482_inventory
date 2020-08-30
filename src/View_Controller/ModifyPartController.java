@@ -34,6 +34,8 @@ public class ModifyPartController implements Initializable {
         maxTxt.setText(String.valueOf(part.getMax()));
         minTxt.setText(String.valueOf(part.getMin()));
 
+
+
         /*
         if(dog.IsVaccinated){
             vaccLbl.setText("Yes");

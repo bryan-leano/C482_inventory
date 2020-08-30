@@ -29,7 +29,8 @@ public class AddPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
+        partIdTxt.setDisable(true);
+        partIdTxt.setText("***Auto Generated***");
     }
 
     @FXML
@@ -37,7 +38,16 @@ public class AddPartController implements Initializable {
 
         try
         {
-            int id = Integer.parseInt(partIdTxt.getText());
+            //int id = Integer.parseInt(partIdTxt.getText());
+            int id = 1;
+            for(Part i: Model.Inventory.getAllParts())
+            {
+                if (i.getId() >= id)
+                {
+                    id = i.getId() + 1;
+                }
+            }
+
             String name = nameTxt.getText();
             double price = Double.parseDouble(priceCostTxt.getText());
             int stock = Integer.parseInt(invTxt.getText());
