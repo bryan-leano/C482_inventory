@@ -34,15 +34,20 @@ public class ModifyPartController implements Initializable {
         maxTxt.setText(String.valueOf(part.getMax()));
         minTxt.setText(String.valueOf(part.getMin()));
 
-
-
-        /*
-        if(dog.IsVaccinated){
-            vaccLbl.setText("Yes");
-        } else {
-            vaccLbl.setText("No");
+        if(part instanceof InHouse)
+        {
+            machineCompanyLbl.setText("Machine ID");
+            machineIdTxt.setText(String.valueOf(((InHouse) part).getMachineId()));
+            InHouseRBtn.setSelected(true);
+        }
+        else
+        {
+            machineCompanyLbl.setText("Company Name");
+            machineIdTxt.setText(String.valueOf(((Outsourced) part).getCompanyName()));
+            OutsourcedRBtn.setSelected(true);
         }
 
+        /*
         if(dog instanceof Dog)
             specialLbl.setText(((Dog) dog).getSpecial())
         */
@@ -51,8 +56,7 @@ public class ModifyPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
-
+        partIdTxt.setDisable(true);
     }
 
     @FXML
@@ -66,6 +70,16 @@ public class ModifyPartController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    @FXML
+    void OnActionInHouseSelection(ActionEvent event) throws IOException {
+        machineCompanyLbl.setText("Machine ID");
+    }
+
+    @FXML
+    void OnActionOutsourcedSelection(ActionEvent event) throws IOException {
+        machineCompanyLbl.setText("Company Name");
     }
 
     @FXML
@@ -94,5 +108,8 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     private RadioButton OutsourcedRBtn;
+
+    @FXML
+    private Label machineCompanyLbl;
 
 }
