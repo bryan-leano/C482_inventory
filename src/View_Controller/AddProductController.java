@@ -2,6 +2,7 @@ package View_Controller;
 
 import Model.Inventory;
 import Model.Part;
+import Model.Product;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
@@ -24,6 +25,9 @@ public class AddProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        productIdTxt.setDisable(true);
+        productIdTxt.setText("***Auto Generated***");
+
         listPartTableView.setItems(Inventory.getAllParts());
         listPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         listPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -39,16 +43,29 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionAddPart(ActionEvent event) {
-
+        
     }
 
     @FXML
-    void onActionAddProduct(ActionEvent event) {
+    void onActionSaveProduct(ActionEvent event) {
+        int id = 1;
+        for(Product i: Model.Inventory.getAllProducts())
+        {
+            if (i.getId() >= id)
+            {
+                id = i.getId() + 1;
+            }
+        }
 
+        String name = productNameTxt.getText();
+        double price = Double.parseDouble(productPriceCostTxt.getText());
+        int stock = Integer.parseInt(productInvTxt.getText());
+        int max = Integer.parseInt(productMaxTxt.getText());
+        int min = Integer.parseInt(productMinTxt.getText());
     }
 
     @FXML
-    void onActionDeleteProduct(ActionEvent event) {
+    void onActionDeletePart(ActionEvent event) {
 
     }
 

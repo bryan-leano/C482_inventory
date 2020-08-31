@@ -86,7 +86,7 @@ public class ModifyPartController implements Initializable {
             stage = (Stage)((Button)event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
             stage.setScene(new Scene(scene));
-            stage.show(); 
+            stage.show();
         }
         catch(NumberFormatException e)
         {
