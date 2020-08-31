@@ -11,10 +11,12 @@ public class Inventory {
     private static ObservableList<Product> filteredProducts = FXCollections.observableArrayList();
 
     public static void addPart(Part part) {
+
         allParts.add(part);
     }
 
     public static void addProduct(Product product) {
+
         allProducts.add(product);
     }
 
@@ -34,8 +36,16 @@ public class Inventory {
         return null;
     }
 
-    public static void updatePart(int index, Part selectedPart) {
+    public static void updatePart(Part selectedPart) {
 
+        for (int i = 0; i < allParts.size(); i++)
+        {
+            if (allParts.get(i).getId() == selectedPart.getId())
+            {
+                allParts.set(i, selectedPart);
+                break;
+            }
+        }
     }
 
     public static void updateProduct(int index, Product newProduct) {

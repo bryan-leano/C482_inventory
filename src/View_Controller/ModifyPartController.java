@@ -1,6 +1,7 @@
 package View_Controller;
 
 import Model.InHouse;
+import Model.Inventory;
 import Model.Outsourced;
 import Model.Part;
 import static Model.Inventory.addPart;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /* import javax.xml.bind.ValidationException; */
+import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -47,10 +49,6 @@ public class ModifyPartController implements Initializable {
             OutsourcedRBtn.setSelected(true);
         }
 
-        /*
-        if(dog instanceof Dog)
-            specialLbl.setText(((Dog) dog).getSpecial())
-        */
     }
 
     @Override
@@ -60,7 +58,43 @@ public class ModifyPartController implements Initializable {
     }
 
     @FXML
-    void onActionSaveModifyPart(ActionEvent event) {
+    void onActionSaveModifyPart(ActionEvent event) throws IOException {
+
+        try
+        {
+            int id = Integer.parseInt(partIdTxt.getText());
+            String name = nameTxt.getText();
+            double price = Double.parseDouble(priceCostTxt.getText());
+            int stock = Integer.parseInt(invTxt.getText());
+            int max = Integer.parseInt(maxTxt.getText());
+            int min = Integer.parseInt(minTxt.getText());
+            boolean isInHouse;
+
+            if(InHouseRBtn.isSelected()) {
+                isInHouse = true;
+                int machineId = Integer.parseInt(machineIdTxt.getText());
+                InHouse selectedPart = new InHouse(id, name, price, stock, min, max, machineId);
+                Inventory.updatePart(selectedPart);
+            }
+            else {
+                isInHouse = false;
+                String CompanyName = machineIdTxt.getText();
+                Outsourced selectedPart = new Outsourced(id, name, price, stock, min, max, CompanyName);
+                Inventory.updatePart(selectedPart);
+            }
+
+            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show(); 
+        }
+        catch(NumberFormatException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning dialog");
+            alert.setContentText("Please add valid value for each text field");
+            alert.showAndWait();
+        }
 
     }
 
