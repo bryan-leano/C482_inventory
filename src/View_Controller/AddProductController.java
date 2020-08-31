@@ -52,12 +52,17 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionAddPart(ActionEvent event) {
-        
-        Part part = listPartTableView.getSelectionModel().getSelectedItem();
-        productParts.add(part);
 
-        System.out.println(productParts);
-        showIncludePartTableView();
+            Part part = listPartTableView.getSelectionModel().getSelectedItem();
+            boolean isPartSelected = listPartTableView.getSelectionModel().isEmpty();
+
+            if(!isPartSelected) {
+                productParts.add(part);
+
+                showIncludePartTableView();
+            } else {
+                System.out.println("This doesn't work");
+            }
 
     }
 
@@ -91,6 +96,8 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {
+        productParts.clear();
+
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         stage.setScene(new Scene(scene));
