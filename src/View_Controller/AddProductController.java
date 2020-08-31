@@ -3,6 +3,8 @@ package View_Controller;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
@@ -34,6 +36,11 @@ public class AddProductController implements Initializable {
         listPartInvLvlCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         listPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        includePartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        includePartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        includePartInvLvlCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        includePartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
     }
 
     @FXML
@@ -41,9 +48,22 @@ public class AddProductController implements Initializable {
 
     }
 
+    private static ObservableList<Part> productParts = FXCollections.observableArrayList();
+
     @FXML
     void onActionAddPart(ActionEvent event) {
         
+        Part part = listPartTableView.getSelectionModel().getSelectedItem();
+        productParts.add(part);
+
+        System.out.println(productParts);
+        showIncludePartTableView();
+
+    }
+
+    public void showIncludePartTableView()
+    {
+        includePartTableView.setItems(productParts);
     }
 
     @FXML
@@ -125,6 +145,6 @@ public class AddProductController implements Initializable {
     private TableColumn<?, ?> includePartPricePerUnitCol;
 
     @FXML
-    private TableView<?> includePartTableView;
+    private TableView<Part> includePartTableView;
 
 }
