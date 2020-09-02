@@ -66,8 +66,8 @@
       </VBox>
       <HBox layoutX="300.0" layoutY="10.0" prefHeight="45.0" prefWidth="339.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onActionSearchPart" text="Search" />
-            <TextField />
+            <Button mnemonicParsing="false" onAction="#onActionSearchPartProdController" text="Search" />
+            <TextField fx:id="searchPartTxt" />
          </children>
       </HBox>
       <HBox layoutX="483.0" layoutY="242.0" prefHeight="27.0" prefWidth="146.0">

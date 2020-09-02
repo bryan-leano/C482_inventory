@@ -45,8 +45,8 @@
       </HBox>
       <HBox layoutX="628.0" layoutY="35.0" prefHeight="53.0" prefWidth="225.0">
          <children>
-            <TextField />
-            <Button mnemonicParsing="false" text="Search" />
+            <TextField fx:id="searchTxt" />
+            <Button mnemonicParsing="false" onAction="#onActionSearchPart" text="Search" />
          </children>
       </HBox>
       <HBox layoutX="628.0" layoutY="234.0" prefHeight="41.0" prefWidth="242.0">

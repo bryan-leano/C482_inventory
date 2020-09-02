@@ -30,7 +30,7 @@ public class MainScreenController implements  Initializable {
 
     public boolean search(int id)
     {
-        for(Part part : Inventory.getAllParts() )
+        for(Part part : Inventory.getAllParts())
         {
             if(part.getId() == id)
                 return true;
@@ -66,7 +66,8 @@ public class MainScreenController implements  Initializable {
         return false;
     }
 
-    public Part selectPart(int id){
+    public Part selectPart(int id)
+    {
         for(Part part : Inventory.getAllParts()){
             if(part.getId() == id)
                 return part;
@@ -76,8 +77,9 @@ public class MainScreenController implements  Initializable {
 
     public ObservableList<Part> filter(String name)
     {
-        if(!(Inventory.getAllFilteredParts().isEmpty()))
+        if(!(Inventory.getAllFilteredParts().isEmpty())) {
             Inventory.getAllFilteredParts().clear();
+        }
 
         for(Part part : Inventory.getAllParts()){
             if(part.getName().contains(name)) {
@@ -85,10 +87,12 @@ public class MainScreenController implements  Initializable {
             }
         }
 
-        if(Inventory.getAllFilteredParts().isEmpty())
+        if(Inventory.getAllFilteredParts().isEmpty()) {
             return Inventory.getAllParts();
-        else
+        }
+        else {
             return Inventory.getAllFilteredParts();
+        }
     }
 
     @Override
@@ -108,26 +112,19 @@ public class MainScreenController implements  Initializable {
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         /*
-        if(search(4))
+        if(search(1))
             System.out.println("Found");
         else
             System.out.println("Not found");
+        partTableView.getSelectionModel().select(selectPart(1));
+        */
 
-
-
-        if(update(1, new Part(1, "Screw", 9.99, 12, 1, 5)))
-            System.out.println("update successful");
-        else
-            System.out.println("update failed");
-
-
+        /*
         if(delete(3))
             System.out.println("delete successful");
         else
             System.out.println("no match");
         */
-
-        //partTableView.getSelectionModel().select(selectPart(3));
 
     }
 
@@ -159,6 +156,12 @@ public class MainScreenController implements  Initializable {
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
+    }
+
+    @FXML
+    void onActionSearchPart(ActionEvent event) {
+        String searchTextField = searchTxt.getText();
+        partTableView.setItems(filter(searchTextField));
     }
 
     @FXML
@@ -216,5 +219,8 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     private TableView<Product> productTableView;
+
+    @FXML
+    private TextField searchTxt;
 
 }

@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 /* import javax.xml.bind.ValidationException; */
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +24,7 @@ public class AddProductController implements Initializable {
 
     Stage stage;
     Parent scene;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -66,6 +68,26 @@ public class AddProductController implements Initializable {
 
     }
 
+    public ObservableList<Part> filter(String name)
+    {
+        if(!(Inventory.getAllFilteredParts().isEmpty())) {
+            Inventory.getAllFilteredParts().clear();
+        }
+
+        for(Part part : Inventory.getAllParts()){
+            if(part.getName().contains(name)) {
+                Inventory.getAllFilteredParts().add(part);
+            }
+        }
+
+        if(Inventory.getAllFilteredParts().isEmpty()) {
+            return Inventory.getAllParts();
+        }
+        else {
+            return Inventory.getAllFilteredParts();
+        }
+    }
+
     public void showIncludePartTableView()
     {
         includePartTableView.setItems(productParts);
@@ -92,6 +114,12 @@ public class AddProductController implements Initializable {
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
+    }
+
+    @FXML
+    void onActionSearchPartProdController(ActionEvent event) {
+        String searchTextField = searchPartTxt.getText();
+        listPartTableView.setItems(filter(searchTextField));
     }
 
     @FXML
@@ -153,5 +181,8 @@ public class AddProductController implements Initializable {
 
     @FXML
     private TableView<Part> includePartTableView;
+
+    @FXML
+    private TextField searchPartTxt;
 
 }
