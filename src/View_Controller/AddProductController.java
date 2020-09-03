@@ -55,16 +55,16 @@ public class AddProductController implements Initializable {
     @FXML
     void onActionAddPart(ActionEvent event) {
 
-            Part part = listPartTableView.getSelectionModel().getSelectedItem();
-            boolean isPartSelected = listPartTableView.getSelectionModel().isEmpty();
+        Part part = listPartTableView.getSelectionModel().getSelectedItem();
+        boolean isPartSelected = listPartTableView.getSelectionModel().isEmpty();
 
-            if(!isPartSelected) {
-                productParts.add(part);
+        if(!isPartSelected) {
+            productParts.add(part);
 
-                showIncludePartTableView();
-            } else {
+            showIncludePartTableView();
+        } else {
                 System.out.println("This doesn't work");
-            }
+        }
 
     }
 
@@ -113,7 +113,16 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionDeletePart(ActionEvent event) {
+        Part part = includePartTableView.getSelectionModel().getSelectedItem();
+        boolean isIncludedPartSelected = includePartTableView.getSelectionModel().isEmpty();
 
+        if(!isIncludedPartSelected) {
+            productParts.remove(part);
+
+            showIncludePartTableView();
+        } else {
+            System.out.println("This doesn't work");
+        }
     }
 
     @FXML
