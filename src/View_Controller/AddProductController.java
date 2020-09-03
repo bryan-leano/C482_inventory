@@ -1,5 +1,6 @@
 package View_Controller;
 
+import Model.InHouse;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
@@ -94,7 +95,7 @@ public class AddProductController implements Initializable {
     }
 
     @FXML
-    void onActionSaveProduct(ActionEvent event) {
+    void onActionSaveProduct(ActionEvent event) throws IOException {
         int id = 1;
         for(Product i: Model.Inventory.getAllProducts())
         {
@@ -109,6 +110,17 @@ public class AddProductController implements Initializable {
         int stock = Integer.parseInt(productInvTxt.getText());
         int max = Integer.parseInt(productMaxTxt.getText());
         int min = Integer.parseInt(productMinTxt.getText());
+
+        Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, max, min));
+
+        productParts.forEach((i) -> {
+            newProduct.addAssociatedPart(i);
+        });
+
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
@@ -123,6 +135,7 @@ public class AddProductController implements Initializable {
         } else {
             System.out.println("This doesn't work");
         }
+
     }
 
     @FXML

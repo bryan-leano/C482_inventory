@@ -15,9 +15,10 @@ public class Inventory {
         allParts.add(part);
     }
 
-    public static void addProduct(Product product) {
+    public static Product addProduct(Product product) {
 
         allProducts.add(product);
+        return product;
     }
 
     public static Part lookupPart (int partId) {
