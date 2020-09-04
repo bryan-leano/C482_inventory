@@ -6,6 +6,8 @@ import Model.Part;
 import Model.Inventory;
 import Model.Product;
 import static Model.Inventory.addPart;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
@@ -14,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /* import javax.xml.bind.ValidationException; */
@@ -29,8 +32,6 @@ public class ModifyProductController implements Initializable {
 
     public void sendProduct(Product product)
     {
-        System.out.println("Hello");
-
         productIdTxt.setText(String.valueOf(product.getId()));
         productNameTxt.setText(product.getName());
         productInvTxt.setText(String.valueOf(product.getStock()));
@@ -38,6 +39,32 @@ public class ModifyProductController implements Initializable {
         productMaxTxt.setText(String.valueOf(product.getMax()));
         productMinTxt.setText(String.valueOf(product.getMin()));
 
+        listPartTableView.setItems(Inventory.getAllParts());
+        listPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        listPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        listPartInvLvlCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        listPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+    }
+
+    public ObservableList<Part> filter(String name)
+    {
+        if(!(Inventory.getAllFilteredParts().isEmpty())) {
+            Inventory.getAllFilteredParts().clear();
+        }
+
+        for(Part part : Inventory.getAllParts()){
+            if(part.getName().contains(name)) {
+                Inventory.getAllFilteredParts().add(part);
+            }
+        }
+
+        if(Inventory.getAllFilteredParts().isEmpty()) {
+            return Inventory.getAllParts();
+        }
+        else {
+            return Inventory.getAllFilteredParts();
+        }
     }
 
     @Override
@@ -48,7 +75,8 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     void onActionSearchPart(ActionEvent event) {
-
+        String searchTextField = searchPartTxt.getText();
+        listPartTableView.setItems(filter(searchTextField));
     }
 
     @FXML
@@ -62,7 +90,7 @@ public class ModifyProductController implements Initializable {
     }
 
     @FXML
-    void onActionDeleteProduct(ActionEvent event) {
+    void onActionDeletePart(ActionEvent event) {
 
     }
 
@@ -107,7 +135,7 @@ public class ModifyProductController implements Initializable {
     private TableColumn<?, ?> listPartPricePerUnitCol;
 
     @FXML
-    private TableView<?> listPartTableView;
+    private TableView<Part> listPartTableView;
 
     @FXML
     private TableColumn<?, ?> includePartIdCol;
@@ -124,4 +152,6 @@ public class ModifyProductController implements Initializable {
     @FXML
     private TableView<?> includePartTableView;
 
+    @FXML
+    private TextField searchPartTxt;
 }

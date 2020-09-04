@@ -63,7 +63,7 @@
         <HBox layoutX="300.0" layoutY="10.0" prefHeight="45.0" prefWidth="339.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#onActionSearchPart" text="Search" />
-                <TextField />
+                <TextField fx:id="searchPartTxt" />
             </children>
         </HBox>
         <HBox layoutX="483.0" layoutY="242.0" prefHeight="27.0" prefWidth="146.0">
@@ -74,7 +74,7 @@
         <HBox layoutX="313.0" layoutY="453.0" prefHeight="35.0" prefWidth="323.0" spacing="20.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#onActionAddProduct" text="Save" />
-                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionDeleteProduct" text="Delete" />
+                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionDeletePart" text="Delete" />
                 <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionDisplayMainScreen" text="Cancel" />
             </children>
         </HBox>
