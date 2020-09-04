@@ -3,6 +3,8 @@ package View_Controller;
 import Model.InHouse;
 import Model.Outsourced;
 import Model.Part;
+import Model.Inventory;
+import Model.Product;
 import static Model.Inventory.addPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -25,10 +27,23 @@ public class ModifyProductController implements Initializable {
     Stage stage;
     Parent scene;
 
+    public void sendProduct(Product product)
+    {
+        System.out.println("Hello");
+
+        productIdTxt.setText(String.valueOf(product.getId()));
+        productNameTxt.setText(product.getName());
+        productInvTxt.setText(String.valueOf(product.getStock()));
+        productPriceCostTxt.setText(String.valueOf(product.getPrice()));
+        productMaxTxt.setText(String.valueOf(product.getMax()));
+        productMinTxt.setText(String.valueOf(product.getMin()));
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
+        productIdTxt.setDisable(true);
     }
 
     @FXML
