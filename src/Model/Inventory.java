@@ -49,8 +49,16 @@ public class Inventory {
         }
     }
 
-    public static void updateProduct(int index, Product newProduct) {
+    public static void updateProduct(Product selectedProduct) {
 
+        for (int i = 0; i < allProducts.size(); i++)
+        {
+            if (allProducts.get(i).getId() == selectedProduct.getId())
+            {
+                allProducts.set(i, selectedProduct);
+                break;
+            }
+        }
     }
 
     public static boolean deletePart(Part selectedPart) {

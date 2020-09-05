@@ -7,6 +7,7 @@ import Model.Inventory;
 import Model.Product;
 import static Model.Inventory.addPart;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -39,11 +40,8 @@ public class ModifyProductController implements Initializable {
         productMaxTxt.setText(String.valueOf(product.getMax()));
         productMinTxt.setText(String.valueOf(product.getMin()));
 
-        listPartTableView.setItems(Inventory.getAllParts());
-        listPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        listPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        listPartInvLvlCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        listPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        modifyProductParts = product.getAllAssociatedParts();
+        showIncludePartTableView();
 
     }
 
@@ -71,6 +69,25 @@ public class ModifyProductController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         productIdTxt.setDisable(true);
+        productIdTxt.setText("***Auto Generated***");
+
+        listPartTableView.setItems(Inventory.getAllParts());
+        listPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        listPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        listPartInvLvlCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        listPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        includePartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        includePartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        includePartInvLvlCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        includePartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    private static ObservableList<Part> modifyProductParts = FXCollections.observableArrayList();
+
+    public void showIncludePartTableView()
+    {
+        includePartTableView.setItems(modifyProductParts);
     }
 
     @FXML
@@ -82,20 +99,63 @@ public class ModifyProductController implements Initializable {
     @FXML
     void onActionAddPart(ActionEvent event) {
 
+        Part part = listPartTableView.getSelectionModel().getSelectedItem();
+        boolean isPartSelected = listPartTableView.getSelectionModel().isEmpty();
+
+        if(!isPartSelected) {
+            modifyProductParts.add(part);
+
+            showIncludePartTableView();
+        } else {
+            System.out.println("This doesn't work");
+        }
     }
 
     @FXML
-    void onActionAddProduct(ActionEvent event) {
+    void onActionSaveModifyProduct(ActionEvent event) throws IOException {
+
+        int id = Integer.parseInt(productIdTxt.getText());
+        String name = productNameTxt.getText();
+        double price = Double.parseDouble(productPriceCostTxt.getText());
+        int stock = Integer.parseInt(productInvTxt.getText());
+        int max = Integer.parseInt(productMaxTxt.getText());
+        int min = Integer.parseInt(productMinTxt.getText());
+
+        Product selectedProduct = new Product(id, name, price, stock, max, min);
+        Inventory.updateProduct(selectedProduct);
+
+        selectedProduct.deleteAllAssociatedParts();
+
+        modifyProductParts.forEach((i) -> {
+            selectedProduct.addAssociatedPart(i);
+        });
+
+        //Why isn't the associated parts not added after being deleted? It's just deleted
+
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
     @FXML
     void onActionDeletePart(ActionEvent event) {
+        Part part = includePartTableView.getSelectionModel().getSelectedItem();
+        boolean isIncludedPartSelected = includePartTableView.getSelectionModel().isEmpty();
 
+        if(!isIncludedPartSelected) {
+            modifyProductParts.remove(part);
+
+            showIncludePartTableView();
+        } else {
+            System.out.println("This doesn't work");
+        }
     }
 
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {
+
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         stage.setScene(new Scene(scene));
@@ -150,7 +210,7 @@ public class ModifyProductController implements Initializable {
     private TableColumn<?, ?> includePartPricePerUnitCol;
 
     @FXML
-    private TableView<?> includePartTableView;
+    private TableView<Part> includePartTableView;
 
     @FXML
     private TextField searchPartTxt;

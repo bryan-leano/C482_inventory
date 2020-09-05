@@ -117,6 +117,9 @@ public class AddProductController implements Initializable {
             newProduct.addAssociatedPart(i);
         });
 
+        productParts.clear();
+        //Do I need to clear the productParts when saving a Product??
+
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         stage.setScene(new Scene(scene));
