@@ -55,21 +55,29 @@ public class AddPartController implements Initializable {
             int min = Integer.parseInt(minTxt.getText());
             boolean isInHouse;
 
-            if(InHouseRBtn.isSelected()) {
-                isInHouse = true;
-                int machineId = Integer.parseInt(machineIdTxt.getText());
-                Inventory.addPart(new InHouse(id, name, price, stock, min, max, machineId));
-            }
-            else {
-                isInHouse = false;
-                String CompanyName = machineIdTxt.getText();
-                Inventory.addPart(new Outsourced(id, name, price, stock, min, max, CompanyName));
+            if ((min <= max) && (stock <= max && stock >= min)) {
+                if(InHouseRBtn.isSelected()) {
+                    isInHouse = true;
+                    int machineId = Integer.parseInt(machineIdTxt.getText());
+                    Inventory.addPart(new InHouse(id, name, price, stock, min, max, machineId));
+                }
+                else {
+                    isInHouse = false;
+                    String CompanyName = machineIdTxt.getText();
+                    Inventory.addPart(new Outsourced(id, name, price, stock, min, max, CompanyName));
+                }
+
+                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning dialog");
+                alert.setContentText("Please add correct values for stock, min and max");
+                alert.showAndWait();
             }
 
-            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
         }
         catch(NumberFormatException e)
         {
@@ -80,6 +88,7 @@ public class AddPartController implements Initializable {
         }
 
     }
+
 
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {

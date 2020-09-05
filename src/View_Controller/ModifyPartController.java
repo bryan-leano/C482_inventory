@@ -70,23 +70,31 @@ public class ModifyPartController implements Initializable {
             int min = Integer.parseInt(minTxt.getText());
             boolean isInHouse;
 
-            if(InHouseRBtn.isSelected()) {
-                isInHouse = true;
-                int machineId = Integer.parseInt(machineIdTxt.getText());
-                InHouse selectedPart = new InHouse(id, name, price, stock, min, max, machineId);
-                Inventory.updatePart(selectedPart);
-            }
-            else {
-                isInHouse = false;
-                String CompanyName = machineIdTxt.getText();
-                Outsourced selectedPart = new Outsourced(id, name, price, stock, min, max, CompanyName);
-                Inventory.updatePart(selectedPart);
+            if ((min <= max) && (stock <= max && stock >= min)) {
+                if(InHouseRBtn.isSelected()) {
+                    isInHouse = true;
+                    int machineId = Integer.parseInt(machineIdTxt.getText());
+                    InHouse selectedPart = new InHouse(id, name, price, stock, min, max, machineId);
+                    Inventory.updatePart(selectedPart);
+                }
+                else {
+                    isInHouse = false;
+                    String CompanyName = machineIdTxt.getText();
+                    Outsourced selectedPart = new Outsourced(id, name, price, stock, min, max, CompanyName);
+                    Inventory.updatePart(selectedPart);
+                }
+
+                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning dialog");
+                alert.setContentText("Please add correct values for stock, min and max");
+                alert.showAndWait();
             }
 
-            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
         }
         catch(NumberFormatException e)
         {
