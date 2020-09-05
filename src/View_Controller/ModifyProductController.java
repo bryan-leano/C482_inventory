@@ -114,28 +114,39 @@ public class ModifyProductController implements Initializable {
     @FXML
     void onActionSaveModifyProduct(ActionEvent event) throws IOException {
 
-        int id = Integer.parseInt(productIdTxt.getText());
-        String name = productNameTxt.getText();
-        double price = Double.parseDouble(productPriceCostTxt.getText());
-        int stock = Integer.parseInt(productInvTxt.getText());
-        int max = Integer.parseInt(productMaxTxt.getText());
-        int min = Integer.parseInt(productMinTxt.getText());
+        try {
 
-        Product selectedProduct = new Product(id, name, price, stock, max, min);
-        Inventory.updateProduct(selectedProduct);
 
-        selectedProduct.deleteAllAssociatedParts();
+            int id = Integer.parseInt(productIdTxt.getText());
+            String name = productNameTxt.getText();
+            double price = Double.parseDouble(productPriceCostTxt.getText());
+            int stock = Integer.parseInt(productInvTxt.getText());
+            int max = Integer.parseInt(productMaxTxt.getText());
+            int min = Integer.parseInt(productMinTxt.getText());
 
-        modifyProductParts.forEach((i) -> {
-            selectedProduct.addAssociatedPart(i);
-        });
+            Product selectedProduct = new Product(id, name, price, stock, max, min);
+            Inventory.updateProduct(selectedProduct);
 
-        //Why isn't the associated parts not added after being deleted? It's just deleted
+            selectedProduct.deleteAllAssociatedParts();
 
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+            modifyProductParts.forEach((i) -> {
+                selectedProduct.addAssociatedPart(i);
+            });
+
+            //Why isn't the associated parts not added after being deleted? It's just deleted
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch(NumberFormatException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning dialog");
+            alert.setContentText("Please add valid value for each text field");
+            alert.showAndWait();
+        }
 
     }
 

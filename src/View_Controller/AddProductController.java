@@ -96,34 +96,43 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionSaveProduct(ActionEvent event) throws IOException {
-        int id = 1;
-        for(Product i: Model.Inventory.getAllProducts())
-        {
-            if (i.getId() >= id)
-            {
-                id = i.getId() + 1;
+
+        try {
+            int id = 1;
+            for (Product i : Model.Inventory.getAllProducts()) {
+                if (i.getId() >= id) {
+                    id = i.getId() + 1;
+                }
             }
+
+            String name = productNameTxt.getText();
+            double price = Double.parseDouble(productPriceCostTxt.getText());
+            int stock = Integer.parseInt(productInvTxt.getText());
+            int max = Integer.parseInt(productMaxTxt.getText());
+            int min = Integer.parseInt(productMinTxt.getText());
+
+            Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, max, min));
+
+            productParts.forEach((i) -> {
+                newProduct.addAssociatedPart(i);
+            });
+
+            productParts.clear();
+            //Do I need to clear the productParts when saving a Product??
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch(NumberFormatException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning dialog");
+            alert.setContentText("Please add valid value for each text field");
+            alert.showAndWait();
         }
 
-        String name = productNameTxt.getText();
-        double price = Double.parseDouble(productPriceCostTxt.getText());
-        int stock = Integer.parseInt(productInvTxt.getText());
-        int max = Integer.parseInt(productMaxTxt.getText());
-        int min = Integer.parseInt(productMinTxt.getText());
-
-        Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, max, min));
-
-        productParts.forEach((i) -> {
-            newProduct.addAssociatedPart(i);
-        });
-
-        productParts.clear();
-        //Do I need to clear the productParts when saving a Product??
-
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
     @FXML
