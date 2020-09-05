@@ -90,10 +90,33 @@ public class ModifyProductController implements Initializable {
         includePartTableView.setItems(modifyProductParts);
     }
 
+    public void search(int id)
+    {
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+                listPartTableView.getSelectionModel().select(selectPart(id));
+        }
+    }
+
+    public Part selectPart(int id)
+    {
+        for(Part part : Inventory.getAllParts()){
+            if(part.getId() == id)
+                return part;
+        }
+        return null;
+    }
+
     @FXML
     void onActionSearchPart(ActionEvent event) {
-        String searchTextField = searchPartTxt.getText();
-        listPartTableView.setItems(filter(searchTextField));
+        if(searchPartTxt.getText() instanceof String) {
+            String searchTextField = searchPartTxt.getText();
+            listPartTableView.setItems(filter(searchTextField));
+        }
+
+        int searchID = Integer.parseInt(searchPartTxt.getText());
+        search(searchID);
     }
 
     @FXML

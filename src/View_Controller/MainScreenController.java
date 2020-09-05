@@ -28,14 +28,13 @@ public class MainScreenController implements  Initializable {
     Stage stage;
     Parent scene;
 
-    public boolean search(int id)
+    public void search(int id)
     {
         for(Part part : Inventory.getAllParts())
         {
             if(part.getId() == id)
-                return true;
+                partTableView.getSelectionModel().select(selectPart(id));
         }
-        return false;
     }
 
     public boolean update(int id, Part partUpdate)
@@ -95,6 +94,7 @@ public class MainScreenController implements  Initializable {
         }
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -110,14 +110,6 @@ public class MainScreenController implements  Initializable {
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        /*
-        if(search(1))
-            System.out.println("Found");
-        else
-            System.out.println("Not found");
-        partTableView.getSelectionModel().select(selectPart(1));
-        */
 
         /*
         if(delete(3))
@@ -160,8 +152,13 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionSearchPart(ActionEvent event) {
-        String searchTextField = searchTxt.getText();
-        partTableView.setItems(filter(searchTextField));
+        if(searchTxt.getText() instanceof String) {
+            String searchTextField = searchTxt.getText();
+            partTableView.setItems(filter(searchTextField));
+        }
+
+            int searchID = Integer.parseInt(searchTxt.getText());
+            search(searchID);
     }
 
     @FXML

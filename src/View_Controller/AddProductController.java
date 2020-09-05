@@ -46,9 +46,22 @@ public class AddProductController implements Initializable {
 
     }
 
-    @FXML
-    void onActionSearchPart(ActionEvent event) {
+    public void search(int id)
+    {
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+                listPartTableView.getSelectionModel().select(selectPart(id));
+        }
+    }
 
+    public Part selectPart(int id)
+    {
+        for(Part part : Inventory.getAllParts()){
+            if(part.getId() == id)
+                return part;
+        }
+        return null;
     }
 
     private static ObservableList<Part> productParts = FXCollections.observableArrayList();
@@ -152,8 +165,14 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionSearchPartProdController(ActionEvent event) {
-        String searchTextField = searchPartTxt.getText();
-        listPartTableView.setItems(filter(searchTextField));
+
+        if(searchPartTxt.getText() instanceof String) {
+            String searchTextField = searchPartTxt.getText();
+            listPartTableView.setItems(filter(searchTextField));
+        }
+
+        int searchID = Integer.parseInt(searchPartTxt.getText());
+        search(searchID);
     }
 
     @FXML
