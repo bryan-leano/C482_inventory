@@ -110,13 +110,6 @@ public class MainScreenController implements  Initializable {
         productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        /*
-        if(delete(3))
-            System.out.println("delete successful");
-        else
-            System.out.println("no match");
-        */
-
     }
 
     @FXML
@@ -146,7 +139,9 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionDeletePart(ActionEvent event) {
-
+        Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
+        Inventory.deletePart(selectedPart);
+        partTableView.setItems(Inventory.getAllParts());
     }
 
     @FXML
@@ -187,7 +182,9 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
-
+        Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
+        Inventory.deleteProduct(selectedProduct);
+        productTableView.setItems(Inventory.getAllProducts());
     }
 
     @FXML
