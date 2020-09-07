@@ -98,7 +98,6 @@ public class MainScreenController implements  Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
         partTableView.setItems(Inventory.getAllParts());
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
