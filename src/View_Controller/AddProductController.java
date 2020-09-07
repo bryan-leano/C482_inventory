@@ -124,18 +124,36 @@ public class AddProductController implements Initializable {
             int max = Integer.parseInt(productMaxTxt.getText());
             int min = Integer.parseInt(productMinTxt.getText());
 
+            //
+            if ((min <= max) && (stock <= max && stock >= min)) {
+                Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, max, min));
+
+                productParts.forEach((i) -> {
+                    newProduct.addAssociatedPart(i);
+                });
+
+                productParts.clear();
+
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning dialog");
+                alert.setContentText("Please add correct values for stock, min and max");
+                alert.showAndWait();
+            }
+
+            /*
             Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, max, min));
 
             productParts.forEach((i) -> {
                 newProduct.addAssociatedPart(i);
             });
+            */
 
-            productParts.clear();
 
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
         }
         catch(NumberFormatException e)
         {

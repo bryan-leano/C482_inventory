@@ -138,8 +138,6 @@ public class ModifyProductController implements Initializable {
     void onActionSaveModifyProduct(ActionEvent event) throws IOException {
 
         try {
-
-
             int id = Integer.parseInt(productIdTxt.getText());
             String name = productNameTxt.getText();
             double price = Double.parseDouble(productPriceCostTxt.getText());
@@ -147,21 +145,27 @@ public class ModifyProductController implements Initializable {
             int max = Integer.parseInt(productMaxTxt.getText());
             int min = Integer.parseInt(productMinTxt.getText());
 
-            Product selectedProduct = new Product(id, name, price, stock, max, min);
-            Inventory.updateProduct(selectedProduct);
+            if ((min <= max) && (stock <= max && stock >= min)) {
+                Product selectedProduct = new Product(id, name, price, stock, max, min);
+                Inventory.updateProduct(selectedProduct);
 
-            selectedProduct.deleteAllAssociatedParts();
+                modifyProductParts.forEach((i) -> {
+                    selectedProduct.addAssociatedPart(i);
+                });
 
-            modifyProductParts.forEach((i) -> {
-                selectedProduct.addAssociatedPart(i);
-            });
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
 
-            //Why isn't the associated parts not added after being deleted? It's just deleted
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning dialog");
+                alert.setContentText("Please add correct values for stock, min and max");
+                alert.showAndWait();
+            }
 
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
+
         }
         catch(NumberFormatException e)
         {
