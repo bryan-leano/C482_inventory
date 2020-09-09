@@ -146,7 +146,7 @@ public class ModifyProductController implements Initializable {
             int min = Integer.parseInt(productMinTxt.getText());
 
             if ((min <= max) && (stock <= max && stock >= min)) {
-                Product selectedProduct = new Product(id, name, price, stock, max, min);
+                Product selectedProduct = new Product(id, name, price, stock, min, max);
                 Inventory.updateProduct(selectedProduct);
 
                 modifyProductParts.forEach((i) -> {

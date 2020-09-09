@@ -126,7 +126,7 @@ public class AddProductController implements Initializable {
 
             //
             if ((min <= max) && (stock <= max && stock >= min)) {
-                Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, max, min));
+                Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, min, max));
 
                 productParts.forEach((i) -> {
                     newProduct.addAssociatedPart(i);
@@ -144,15 +144,6 @@ public class AddProductController implements Initializable {
                 alert.setContentText("Please add correct values for stock, min and max");
                 alert.showAndWait();
             }
-
-            /*
-            Product newProduct = Inventory.addProduct(new Product(id, name, price, stock, max, min));
-
-            productParts.forEach((i) -> {
-                newProduct.addAssociatedPart(i);
-            });
-            */
-
 
         }
         catch(NumberFormatException e)
