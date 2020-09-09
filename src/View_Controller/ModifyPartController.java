@@ -88,10 +88,20 @@ public class ModifyPartController implements Initializable {
                 scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
+            } else if (min > max) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning dialog");
+                alert.setContentText("Please add correct values for min and max");
+                alert.showAndWait();
+            } else if (stock <= min || stock >= max) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning dialog");
+                alert.setContentText("Inventory must be between min and max");
+                alert.showAndWait();
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning dialog");
-                alert.setContentText("Please add correct values for stock, min and max");
+                alert.setContentText("Please add correct values for this form!");
                 alert.showAndWait();
             }
 
