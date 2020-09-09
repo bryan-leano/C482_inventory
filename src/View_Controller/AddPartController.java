@@ -103,8 +103,8 @@ public class AddPartController implements Initializable {
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will clear all text field " +
-                "values, do you want to continue?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to cancel adding a part and go back to the main screen?");
 
         Optional<ButtonType> result = alert.showAndWait();
 
@@ -115,7 +115,6 @@ public class AddPartController implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
         }
-
 
     }
 

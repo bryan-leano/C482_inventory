@@ -188,25 +188,41 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     void onActionDeletePart(ActionEvent event) {
-        Part part = includePartTableView.getSelectionModel().getSelectedItem();
-        boolean isIncludedPartSelected = includePartTableView.getSelectionModel().isEmpty();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to remove this part?");
 
-        if(!isIncludedPartSelected) {
-            modifyProductParts.remove(part);
+        Optional<ButtonType> result = alert.showAndWait();
 
-            showIncludePartTableView();
-        } else {
-            System.out.println("This doesn't work");
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            Part part = includePartTableView.getSelectionModel().getSelectedItem();
+            boolean isIncludedPartSelected = includePartTableView.getSelectionModel().isEmpty();
+
+            if(!isIncludedPartSelected) {
+                modifyProductParts.remove(part);
+
+                showIncludePartTableView();
+            } else {
+                System.out.println("This doesn't work");
+            }
         }
     }
 
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {
 
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to cancel modifying a product and go back to the main screen?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     @FXML

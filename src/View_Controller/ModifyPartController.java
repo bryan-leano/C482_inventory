@@ -118,10 +118,20 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to cancel modifying a part and go back to the main screen?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+
     }
 
     @FXML

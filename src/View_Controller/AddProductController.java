@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddProductController implements Initializable {
@@ -168,17 +169,25 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionDeletePart(ActionEvent event) {
-        Part part = includePartTableView.getSelectionModel().getSelectedItem();
-        boolean isIncludedPartSelected = includePartTableView.getSelectionModel().isEmpty();
 
-        if(!isIncludedPartSelected) {
-            productParts.remove(part);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to remove this part?");
 
-            showIncludePartTableView();
-        } else {
-            System.out.println("This doesn't work");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            Part part = includePartTableView.getSelectionModel().getSelectedItem();
+            boolean isIncludedPartSelected = includePartTableView.getSelectionModel().isEmpty();
+
+            if(!isIncludedPartSelected) {
+                productParts.remove(part);
+
+                showIncludePartTableView();
+            } else {
+                System.out.println("This doesn't work");
+            }
         }
-
     }
 
     @FXML
@@ -195,12 +204,21 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionDisplayMainScreen(ActionEvent event) throws IOException {
-        productParts.clear();
 
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to cancel adding a product and go back to the main screen?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            productParts.clear();
+
+            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     @FXML

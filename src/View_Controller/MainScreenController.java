@@ -177,9 +177,17 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionDeletePart(ActionEvent event) {
-        Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
-        Inventory.deletePart(selectedPart);
-        partTableView.setItems(Inventory.getAllParts());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to delete this part?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
+            Inventory.deletePart(selectedPart);
+            partTableView.setItems(Inventory.getAllParts());
+        }
     }
 
     @FXML
@@ -202,6 +210,7 @@ public class MainScreenController implements  Initializable {
 
         int searchID = Integer.parseInt(searchProductTxt.getText());
         searchProduct(searchID);
+
     }
 
     @FXML
@@ -231,9 +240,18 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
-        Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
-        Inventory.deleteProduct(selectedProduct);
-        productTableView.setItems(Inventory.getAllProducts());
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want " +
+                "to delete this product?g");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
+            Inventory.deleteProduct(selectedProduct);
+            productTableView.setItems(Inventory.getAllProducts());
+        }
     }
 
     @FXML
