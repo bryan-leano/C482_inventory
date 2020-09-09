@@ -28,12 +28,21 @@ public class MainScreenController implements  Initializable {
     Stage stage;
     Parent scene;
 
-    public void search(int id)
+    public void searchPart(int id)
     {
         for(Part part : Inventory.getAllParts())
         {
             if(part.getId() == id)
                 partTableView.getSelectionModel().select(selectPart(id));
+        }
+    }
+
+    public void searchProduct(int id)
+    {
+        for(Product product : Inventory.getAllProducts())
+        {
+            if(product.getId() == id)
+                productTableView.getSelectionModel().select(selectProduct(id));
         }
     }
 
@@ -74,7 +83,16 @@ public class MainScreenController implements  Initializable {
             return null;
     }
 
-    public ObservableList<Part> filter(String name)
+    public Product selectProduct(int id)
+    {
+        for(Product product : Inventory.getAllProducts()){
+            if(product.getId() == id)
+                return product;
+        }
+        return null;
+    }
+
+    public ObservableList<Part> partFilter(String name)
     {
         if(!(Inventory.getAllFilteredParts().isEmpty())) {
             Inventory.getAllFilteredParts().clear();
@@ -91,6 +109,26 @@ public class MainScreenController implements  Initializable {
         }
         else {
             return Inventory.getAllFilteredParts();
+        }
+    }
+
+    public ObservableList<Product> productFilter(String name)
+    {
+        if(!(Inventory.getAllFilteredProducts().isEmpty())) {
+            Inventory.getAllFilteredProducts().clear();
+        }
+
+        for(Product product : Inventory.getAllProducts()){
+            if(product.getName().contains(name)) {
+                Inventory.getAllFilteredProducts().add(product);
+            }
+        }
+
+        if(Inventory.getAllFilteredProducts().isEmpty()) {
+            return Inventory.getAllProducts();
+        }
+        else {
+            return Inventory.getAllFilteredProducts();
         }
     }
 
@@ -146,13 +184,24 @@ public class MainScreenController implements  Initializable {
 
     @FXML
     void onActionSearchPart(ActionEvent event) {
-        if(searchTxt.getText() instanceof String) {
-            String searchTextField = searchTxt.getText();
-            partTableView.setItems(filter(searchTextField));
+        if(searchPartTxt.getText() instanceof String) {
+            String searchTextField = searchPartTxt.getText();
+            partTableView.setItems(partFilter(searchTextField));
         }
 
-            int searchID = Integer.parseInt(searchTxt.getText());
-            search(searchID);
+            int searchID = Integer.parseInt(searchPartTxt.getText());
+            searchPart(searchID);
+    }
+
+    @FXML
+    void onActionSearchProduct(ActionEvent event) {
+        if(searchProductTxt.getText() instanceof String) {
+            String searchTextField = searchProductTxt.getText();
+            productTableView.setItems(productFilter(searchTextField));
+        }
+
+        int searchID = Integer.parseInt(searchProductTxt.getText());
+        searchProduct(searchID);
     }
 
     @FXML
@@ -223,6 +272,9 @@ public class MainScreenController implements  Initializable {
     private TableView<Product> productTableView;
 
     @FXML
-    private TextField searchTxt;
+    private TextField searchPartTxt;
+
+    @FXML
+    private TextField searchProductTxt;
 
 }

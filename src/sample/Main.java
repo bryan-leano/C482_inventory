@@ -29,11 +29,16 @@ public class Main extends Application {
         Inventory.addPart(part3);
         Inventory.addPart(part4);
 
-        Product product1 = new Product(1, "ProductTestOne", 9.99, 15, 10, 20);
+        Product product1 = new Product(1, "ProductOne", 9.99, 15, 10, 20);
         product1.addAssociatedPart(part1);
         product1.addAssociatedPart(part4);
+        Product product2 = new Product(2, "ProductTwo", 9.99, 15, 10, 20);
+        product2.addAssociatedPart(part2);
+        product2.addAssociatedPart(part3);
 
         Inventory.addProduct(product1);
+        Inventory.addProduct(product2);
+
 
         launch(args);
     }
